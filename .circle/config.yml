@@ -8,7 +8,7 @@ jobs:
     steps: 
       - checkout
       - run: 
-          command: "npm i"
+          command: "npm install"
           name: "Compile"
       - run: 
           command: "npm run lint"
