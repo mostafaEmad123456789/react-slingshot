@@ -6,36 +6,24 @@ jobs:
     docker: 
       - image: "circleci/node:13.8.0"
     steps: 
-      - run: 
-          command: "npm run lint"
-          name: "Compile"
-      - save_cache:
-          key: "npm-packages"
-          paths: 
-            - /src/node_modules
-          
+      - checkout
+      - run: npm i
+      - run: npm run lint
+      
   test: 
     docker: 
       - image: "circleci/node:13.8.0"
     steps: 
-      - run: 
-          command: "npm run test"
-          name: "Test"
-      - restore_cache:
-          keys: 
-            - "npm-packages"
-          
-
+      - checkout
+      - run: npm run test
+      
   analyze: 
     docker: 
       - image: "circleci/node:13.8.0"
     steps: 
-      - run: 
-          command: "npm audit"
-          name: "Analyze"
-      - restore_cache:
-          keys: 
-            - "npm-packages"
+      - checkout
+      - run: npm i
+      - run: npm audit
 
 workflows: 
   CI-Pipline-workflow: 
